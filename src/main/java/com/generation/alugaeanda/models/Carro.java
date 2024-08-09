@@ -39,7 +39,7 @@ public class Carro {
 	@Size(max = 255, message = "O atributo ano deve conter no maximo 255 caracteres")
 	private String foto;
 	
-	@NotBlank(message = "O atributo placa é obrigatorio")
+	@NotBlank(message = "O atributo placa é uobrigatorio")
 	@Size(max = 100, message = "O atributo placa deve conter no minimo 1 e no maximo 100 caracteres")
 	private String placa;
 	
@@ -49,7 +49,7 @@ public class Carro {
 	@NotNull(message = "O atributo disponibilidade é obrigatorio")
 	private boolean alugado;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("carro")
 	private Usuario usuario;
 	

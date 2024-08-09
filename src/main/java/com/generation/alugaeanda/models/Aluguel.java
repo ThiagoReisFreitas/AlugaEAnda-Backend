@@ -1,6 +1,6 @@
 package com.generation.alugaeanda.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -21,6 +21,15 @@ public class Aluguel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull(message = "O atributo inicio é obrigatorio")
+	private LocalDateTime inicio;
+	
+	@NotNull(message = "O atributo fim é obrigatorio")
+	private LocalDateTime fim;
+	
+	@NotNull(message = "O atributo total é obrigatorio")
+	private double total;
+
 	@ManyToOne
 	@JsonIgnoreProperties("aluguel")
 	private Usuario usuario;
@@ -28,15 +37,6 @@ public class Aluguel {
 	@OneToOne
 	@JsonIgnoreProperties("aluguel")
 	private Carro carro;
-	
-	@NotNull(message = "O atributo inicio é obrigatorio")
-	private Date inicio;
-	
-	@NotNull(message = "O atributo fim é obrigatorio")
-	private Date fim;
-	
-	@NotNull(message = "O atributo total é obrigatorio")
-	private double total;
 
 	public Long getId() {
 		return id;
@@ -44,6 +44,30 @@ public class Aluguel {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public LocalDateTime getInicio() {
+		return inicio;
+	}
+
+	public void setInicio(LocalDateTime inicio) {
+		this.inicio = inicio;
+	}
+
+	public LocalDateTime getFim() {
+		return fim;
+	}
+
+	public void setFim(LocalDateTime fim) {
+		this.fim = fim;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
 	}
 
 	public Usuario getUsuario() {
@@ -60,30 +84,6 @@ public class Aluguel {
 
 	public void setCarro(Carro carro) {
 		this.carro = carro;
-	}
-
-	public Date getInicio() {
-		return inicio;
-	}
-
-	public void setInicio(Date inicio) {
-		this.inicio = inicio;
-	}
-
-	public Date getFim() {
-		return fim;
-	}
-
-	public void setFim(Date fim) {
-		this.fim = fim;
-	}
-
-	public double getTotal() {
-		return total;
-	}
-
-	public void setTotal(double total) {
-		this.total = total;
 	}
 	
 }

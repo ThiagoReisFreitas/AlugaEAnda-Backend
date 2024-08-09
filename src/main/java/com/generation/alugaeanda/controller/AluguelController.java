@@ -20,6 +20,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.alugaeanda.models.Aluguel;
 import com.generation.alugaeanda.repository.AluguelRepository;
+import com.generation.alugaeanda.repository.CarroRepository;
+import com.generation.alugaeanda.repository.UsuarioRepository;
 
 import jakarta.validation.Valid;
 
@@ -31,6 +33,12 @@ public class AluguelController {
 	
 	@Autowired
 	private AluguelRepository aluguelRepository;
+	
+	@Autowired
+	private CarroRepository carroRepository;
+	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	
 	@GetMapping
 	public ResponseEntity<List<Aluguel>> getAll(){
@@ -46,16 +54,29 @@ public class AluguelController {
 	
 	@PostMapping
 	public ResponseEntity<Aluguel> post(@Valid @RequestBody Aluguel aluguel){
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(aluguelRepository.save(aluguel));
+		if(carroRepository.existsById(aluguel.getCarro().getId())) {
+			if(usuarioRepository.existsById(aluguel.getUsuario().getId())) {				
+				return ResponseEntity.status(HttpStatus.CREATED)
+						.body(aluguelRepository.save(aluguel));
+			}
+		}
+		
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Carro não existe", null);
 	}
  
 	@PutMapping
 	public ResponseEntity<Aluguel> put (@Valid @RequestBody Aluguel aluguel){
-		return aluguelRepository.findById(aluguel.getId())
-				.map(resposta -> ResponseEntity.status(HttpStatus.OK)
-						.body(aluguelRepository.save(aluguel)))
-				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+		if(aluguelRepository.existsById(aluguel.getId())) {
+			if(usuarioRepository.existsById(aluguel.getUsuario().getId())) {
+				if(carroRepository.existsById(aluguel.getCarro().getId())) {					
+					return ResponseEntity.status(HttpStatus.OK)
+							.body(aluguelRepository.save(aluguel));
+				}
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Carro não existe", null);
+			}
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuario não existe", null);
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
