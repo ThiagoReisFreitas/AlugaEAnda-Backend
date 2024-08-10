@@ -49,9 +49,9 @@ public class Usuario {
 	@JsonIgnoreProperties("usuario")
 	private List<Aluguel> aluguel;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("usuario")
-	private List<Carro> carro;
+	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	//@JsonIgnoreProperties("usuario")
+	//private List<Carro> carro;
 	
 	public Long getId() {
 		return id;
@@ -109,13 +109,13 @@ public class Usuario {
 		this.aluguel = aluguel;
 	}
 
-	public List<Carro> getCarro() {
-		return carro;
-	}
+	//public List<Carro> getCarro() {
+	//	return carro;
+	//}
 
-	public void setCarro(List<Carro> carro) {
-		this.carro = carro;
-	}
+	//public void setCarro(List<Carro> carro) {
+	//	this.carro = carro;
+	//}
 
 	
 }

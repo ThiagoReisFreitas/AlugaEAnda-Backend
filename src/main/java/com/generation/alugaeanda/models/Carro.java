@@ -49,9 +49,9 @@ public class Carro {
 	@NotNull(message = "O atributo disponibilidade é obrigatorio")
 	private boolean alugado;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("carro")
-	private Usuario usuario;
+	//@ManyToOne(fetch = FetchType.LAZY)
+	//@JsonIgnoreProperties("carro")
+	//private Usuario usuario;
 	
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "carro", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("carro")
@@ -121,13 +121,13 @@ public class Carro {
 		this.alugado = alugado;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
+	//public Usuario getUsuario() {
+	//	return usuario;
+	//}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+	//public void setUsuario(Usuario usuario) {
+	//	this.usuario = usuario;
+	//}
 
 	public Aluguel getAluguel() {
 		return aluguel;
