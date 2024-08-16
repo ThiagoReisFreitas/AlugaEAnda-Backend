@@ -28,11 +28,11 @@ public class Usuario {
 	@NotBlank(message = "O atributo nome é obrigatorio")
 	@Size(min = 2, max = 100, message = "O atributo nome deve ter no minino 2 e no maximo 100 caracteres")
 	private String nome;
-	
-	@NotBlank(message = "O atributo email é obrigatorio")
-	@Email(message = "O atributo email deve ser um endereço de email valido")
+
+	@NotBlank(message = "O atributo usuario é obrigatorio")
+	@Email(message = "O atributo usuario deve ser um endereço de email valido")
 	@Size(max = 100, message = "O atributo email deve ter no maximo 100 caracteres")
-	private String email;
+	private String usuario;
 	
 	@NotBlank(message = "O atributo senha é obrigatorio")
 	@Size(min = 8, max = 255, message = "O atributo senha deve ter no minino 8 e no maximo 255 caracteres")
@@ -69,12 +69,12 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getSenha() {
